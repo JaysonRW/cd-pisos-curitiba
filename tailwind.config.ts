@@ -52,6 +52,11 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				// CD Pisos Brand Colors
+				'brand-purple': 'hsl(var(--brand-purple))',
+				'brand-blue': 'hsl(var(--brand-blue))',
+				'brand-green': 'hsl(var(--brand-green))',
+				'brand-red': 'hsl(var(--brand-red))',
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',

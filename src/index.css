@@ -9,32 +9,46 @@ All colors MUST be HSL.
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 253 42% 31%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 253 42% 31%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 253 42% 31%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* CD Pisos Brand Colors */
+    --brand-purple: 253 42% 31%;      /* #3e2d73 - Roxo escuro */
+    --brand-blue: 207 60% 59%;        /* #5b9cd4 - Azul claro */
+    --brand-green: 107 29% 44%;       /* #579251 - Verde musgo */
+    --brand-red: 349 58% 49%;         /* #be3645 - Vermelho escuro */
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --primary: 253 42% 31%;
+    --primary-foreground: 0 0% 100%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --secondary: 207 60% 95%;
+    --secondary-foreground: 253 42% 31%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --muted: 253 10% 96%;
+    --muted-foreground: 253 20% 45%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --accent: 207 60% 59%;
+    --accent-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --destructive: 349 58% 49%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 253 20% 90%;
+    --input: 253 20% 90%;
+    --ring: 253 42% 31%;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(253 42% 31%), hsl(207 60% 59%));
+    --gradient-section: linear-gradient(180deg, hsl(0 0% 98%), hsl(0 0% 100%));
+    
+    /* Shadows */
+    --shadow-elegant: 0 10px 40px -10px hsl(253 42% 31% / 0.2);
+    --shadow-card: 0 4px 20px -4px hsl(253 42% 31% / 0.1);
 
     --radius: 0.5rem;
 
