@@ -5,10 +5,10 @@ import partnerCejatel from "@/assets/partner-cejatel.webp";
 const PartnersSection = () => {
   const partners = [
     { name: "Kerakoll", logo: partnerKerakoll, description: "Argamassas e produtos técnicos" },
-    { name: "Idealle", logo: "", description: "Porcelanatos premium" },
-    { name: "Cecafi", logo: "", description: "Pisos cerâmicos" },
-    { name: "Pisoforte", logo: "", description: "Revestimentos resistentes" },
-    { name: "Fioranno", logo: "", description: "Pisos de alta qualidade" },
+    { name: "Idealle", logo: "https://i.ibb.co/wFgbtsDj/Logo-IDEALLE-colorida.jpg", description: "Porcelanatos premium" },
+    { name: "Cecafi", logo: "https://i.ibb.co/39PMLLqt/Logo-CECAFI-colorida.jpg", description: "Pisos cerâmicos" },
+    { name: "Pisoforte", logo: "https://i.ibb.co/YFwQxFdm/Logo-PISOFORTE-colorida.jpg", description: "Revestimentos resistentes" },
+    { name: "Fioranno", logo: "https://i.ibb.co/8wd60Y1/Logo-FIORANNO-colorida.jpg", description: "Pisos de alta qualidade" },
     { name: "Cejatel", logo: partnerCejatel, description: "Materiais cerâmicos" }
   ];
 

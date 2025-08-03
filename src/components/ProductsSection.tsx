@@ -1,9 +1,13 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { CheckCircle, X } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { CheckCircle, X, Info, Ruler, Package } from "lucide-react";
 import product1 from "@/assets/product-clean-ac.webp";
 import product2 from "@/assets/product-lisboa.webp";
 import product3 from "@/assets/product-noble.webp";
+
+// Nova URL da imagem de argamassas
+const argamassasImage = "https://i.ibb.co/vKs9rTM/Argamassas-Kerakoll.jpg";
 
 const ProductsSection = () => {
   const openWhatsApp = () => {
@@ -20,7 +24,13 @@ const ProductsSection = () => {
         "Fácil manutenção", 
         "Variedade de designs",
         "Preços competitivos"
-      ]
+      ],
+      specs: {
+        dimensions: ["45x45cm", "50x50cm", "60x60cm"],
+        absorption: "10% a 20%",
+        usage: "Ambientes internos e externos",
+        coverage: "1,5 a 2,0 peças/m²"
+      }
     },
     {
       title: "Porcelanatos",
@@ -31,18 +41,30 @@ const ProductsSection = () => {
         "Resistência a manchas",
         "Acabamento perfeito",
         "Tecnologia avançada"
-      ]
+      ],
+      specs: {
+        dimensions: ["60x60cm", "90x90cm", "100x100cm", "120x120cm"],
+        absorption: "Menos de 0,5%",
+        usage: "Todos os ambientes, incluindo externos",
+        coverage: "1,1 a 2,8 peças/m²"
+      }
     },
     {
       title: "Argamassas",
       description: "Qualidade profissional para fixação",
-      image: product3,
+      image: argamassasImage,
       features: [
         "Aderência garantida",
         "Fácil aplicação",
         "Secagem rápida",
         "Múltiplos usos"
-      ]
+      ],
+      specs: {
+        types: ["AC-I", "AC-II", "AC-III"],
+        coverage: "3,5 a 4,5 m²/saco",
+        packaging: "Sacos de 20kg",
+        cureTime: "24h para tráfego leve"
+      }
     }
   ];
 
@@ -67,7 +89,7 @@ const ProductsSection = () => {
         </div>
 
         {/* Main Products */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
           {products.map((product, index) => (
             <Card key={index} className="overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-0 shadow-lg">
               <div className="aspect-video overflow-hidden">
@@ -84,14 +106,119 @@ const ProductsSection = () => {
                 <p className="text-muted-foreground mb-4">
                   {product.description}
                 </p>
-                <ul className="space-y-2 mb-6">
-                  {product.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-center text-sm">
-                      <CheckCircle className="w-4 h-4 text-brand-green mr-2 flex-shrink-0" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
+
+                <Tabs defaultValue="features" className="mb-6">
+                  <TabsList className="grid w-full grid-cols-2">
+                    <TabsTrigger value="features" className="text-xs">
+                      <CheckCircle className="w-3 h-3 mr-1" />
+                      Benefícios
+                    </TabsTrigger>
+                    <TabsTrigger value="specs" className="text-xs">
+                      <Info className="w-3 h-3 mr-1" />
+                      Técnico
+                    </TabsTrigger>
+                  </TabsList>
+                  
+                  <TabsContent value="features" className="mt-4">
+                    <ul className="space-y-2">
+                      {product.features.map((feature, featureIndex) => (
+                        <li key={featureIndex} className="flex items-center text-sm">
+                          <CheckCircle className="w-4 h-4 text-brand-green mr-2 flex-shrink-0" />
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  </TabsContent>
+                  
+                  <TabsContent value="specs" className="mt-4">
+                    <div className="space-y-3 text-sm">
+                      {product.title === "Pisos Cerâmicos" && (
+                        <>
+                          <div className="flex items-start">
+                            <Ruler className="w-4 h-4 text-brand-blue mr-2 mt-0.5 flex-shrink-0" />
+                            <div>
+                              <strong>Dimensões:</strong>
+                              <div className="text-muted-foreground">
+                                {product.specs.dimensions.join(", ")}
+                              </div>
+                            </div>
+                          </div>
+                          <div className="flex items-start">
+                            <Package className="w-4 h-4 text-brand-purple mr-2 mt-0.5 flex-shrink-0" />
+                            <div>
+                              <strong>Absorção:</strong>
+                              <div className="text-muted-foreground">{product.specs.absorption}</div>
+                            </div>
+                          </div>
+                          <div className="flex items-start">
+                            <Info className="w-4 h-4 text-brand-green mr-2 mt-0.5 flex-shrink-0" />
+                            <div>
+                              <strong>Uso:</strong>
+                              <div className="text-muted-foreground">{product.specs.usage}</div>
+                            </div>
+                          </div>
+                        </>
+                      )}
+                      
+                      {product.title === "Porcelanatos" && (
+                        <>
+                          <div className="flex items-start">
+                            <Ruler className="w-4 h-4 text-brand-blue mr-2 mt-0.5 flex-shrink-0" />
+                            <div>
+                              <strong>Dimensões:</strong>
+                              <div className="text-muted-foreground">
+                                {product.specs.dimensions.join(", ")}
+                              </div>
+                            </div>
+                          </div>
+                          <div className="flex items-start">
+                            <Package className="w-4 h-4 text-brand-purple mr-2 mt-0.5 flex-shrink-0" />
+                            <div>
+                              <strong>Absorção:</strong>
+                              <div className="text-muted-foreground">{product.specs.absorption}</div>
+                            </div>
+                          </div>
+                          <div className="flex items-start">
+                            <Info className="w-4 h-4 text-brand-green mr-2 mt-0.5 flex-shrink-0" />
+                            <div>
+                              <strong>Uso:</strong>
+                              <div className="text-muted-foreground">{product.specs.usage}</div>
+                            </div>
+                          </div>
+                        </>
+                      )}
+                      
+                      {product.title === "Argamassas" && (
+                        <>
+                          <div className="flex items-start">
+                            <Package className="w-4 h-4 text-brand-blue mr-2 mt-0.5 flex-shrink-0" />
+                            <div>
+                              <strong>Tipos:</strong>
+                              <div className="text-muted-foreground">
+                                {product.specs.types.join(", ")}
+                              </div>
+                            </div>
+                          </div>
+                          <div className="flex items-start">
+                            <Ruler className="w-4 h-4 text-brand-purple mr-2 mt-0.5 flex-shrink-0" />
+                            <div>
+                              <strong>Rendimento:</strong>
+                              <div className="text-muted-foreground">{product.specs.coverage}</div>
+                            </div>
+                          </div>
+                          <div className="flex items-start">
+                            <Info className="w-4 h-4 text-brand-green mr-2 mt-0.5 flex-shrink-0" />
+                            <div>
+                              <strong>Embalagem:</strong>
+                              <div className="text-muted-foreground">{product.specs.packaging}</div>
+                            </div>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  </TabsContent>
+                </Tabs>
+
                 <Button 
                   onClick={openWhatsApp}
                   className="w-full bg-brand-blue hover:bg-brand-blue/90"

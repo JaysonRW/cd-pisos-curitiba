@@ -9,6 +9,8 @@ const Header = () => {
   const menuItems = [
     "Quem Somos",
     "Produtos", 
+    "Calculadoras",
+    "Pedidos",
     "Como Trabalhamos",
     "Estrutura",
     "Parceiros",
@@ -16,7 +18,20 @@ const Header = () => {
   ];
 
   const scrollToSection = (sectionName: string) => {
-    const element = document.getElementById(sectionName.toLowerCase().replace(" ", "-"));
+    // Map menu items to section IDs
+    const sectionMap: { [key: string]: string } = {
+      "Quem Somos": "quem-somos",
+      "Produtos": "produtos",
+      "Calculadoras": "calculadoras",
+      "Pedidos": "pedidos",
+      "Como Trabalhamos": "como-trabalhamos",
+      "Estrutura": "estrutura",
+      "Parceiros": "parceiros",
+      "Contato": "contato"
+    };
+    
+    const sectionId = sectionMap[sectionName];
+    const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
