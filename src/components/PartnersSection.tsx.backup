@@ -7,11 +7,11 @@ const PartnersSection = () => {
   const partners = [
     { name: "Kerakoll", logo: partnerKerakoll, description: "Argamassas e produtos técnicos" },
     { name: "Idealle", logo: "https://i.ibb.co/wFgbtsDj/Logo-IDEALLE-colorida.jpg", description: "Porcelanatos premium" },
-    { name: "Cecafi", logo: "https://i.ibb.co/39PMLLqt/Logo-CECAFI-colorida.jpg", description: "Pisos cerâmicos" },
+    { name: "Cecafi", logo: "https://imgs.search.brave.com/2phr3_6JZyWTktr6TbsZrRTamEOrjAG4c93pJdXfm-w/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzk0L2M5/LzA3Lzk0YzkwN2Nm/YjdmMzY2NTAxODg2/ZWU0ZmFjYWE5ZGMx/LmpwZw", description: "Pisos cerâmicos" },
     { name: "Pisoforte", logo: "https://i.ibb.co/YFwQxFdm/Logo-PISOFORTE-colorida.jpg", description: "Revestimentos resistentes" },
-    { name: "Fioranno", logo: "https://i.ibb.co/8wd60Y1/Logo-FIORANNO-colorida.jpg", description: "Pisos de alta qualidade" },
+    { name: "Fioranno", logo: "https://imgs.search.brave.com/Y2Yu4a0s4hzT8xBNXDNd1CPZS410AE5WAtsz2ndUe20/rs:fit:0:180:1:0/g:ce/aHR0cHM6Ly9pbWFn/ZS5zaHV0dGVyc3Rv/Y2suY29tL2ltYWdl/LXZlY3Rvci9oaWdo/LXF1YWxpdHktY29s/b3JmdWwtaG9tZS1y/ZXBhaXItMTAwbnct/MjM5MTM4NTE5Ny5q/cGc", description: "Pisos de alta qualidade" },
     { name: "Cejatel", logo: partnerCejatel, description: "Materiais cerâmicos" },
-    { name: "Gyotoku", logo: "https://i.ibb.co/XgPwtNs/Logos-cdpisos-gyotoku.png", description: "prêmio Ruy Othake de melhor porcelanato do Brasil por 7 vezes" }
+    { name: "Gyotoku", logo: "https://imgs.search.brave.com/WpIBqf9H5P5y89vZjoNer3fYUaNz4gkooRL5ZF6sjmA/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zZWNy/ZXRiYXRoc3RvcmUu/Y29tL2Nkbi9zaG9w/L3Byb2R1Y3RzL1J1/eU9odGFrZWNvZmZl/ZS5qcGc_dj0xNzQz/Nzc1MjM0JndpZHRo/PTEwODA", description: "prêmio Ruy Othake de melhor porcelanato do Brasil por 7 vezes" }
   ];
 
   return (
