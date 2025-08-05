@@ -13,8 +13,7 @@ const Header = () => {
     "Pedidos",
     "Como Trabalhamos",
     "Estrutura",
-    "Parceiros",
-    "Contato"
+    "Parceiros",    
   ];
 
   const scrollToSection = (sectionName: string) => {
@@ -39,7 +38,7 @@ const Header = () => {
   };
 
   const openWhatsApp = () => {
-    window.open("https://wa.me/5541996190069", "_blank");
+    window.open("https://wa.me/5541996190069?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Acabei%20de%20visitar%20o%20site%20da%20CD%20Pisos%20%26%20Distribui%C3%A7%C3%A3o%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20os%20produtos.%20Pode%20me%20ajudar%2C%20por%20favor%3F%20%F0%9F%98%8A", "_blank");
   };
 
   return (
@@ -55,7 +54,7 @@ const Header = () => {
             />
             <div className="hidden sm:block">
               <h1 className="text-lg font-bold text-brand-purple">CD Pisos</h1>
-              <p className="text-xs text-muted-foreground">Pisos e Revestimentos</p>
+              <p className="text-xs text-muted-foreground">O Atacadão de Pisos</p>
             </div>
           </div>
 

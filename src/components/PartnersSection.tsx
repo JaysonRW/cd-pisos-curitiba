@@ -6,12 +6,12 @@ import partnerCejatel from "@/assets/partner-cejatel.webp";
 const PartnersSection = () => {
   const partners = [
     { name: "Kerakoll", logo: partnerKerakoll, description: "Argamassas e produtos técnicos" },
-    { name: "Idealle", logo: "https://i.ibb.co/wFgbtsDj/Logo-IDEALLE-colorida.jpg", description: "Porcelanatos premium" },
+    { name: "Idealle", logo: "https://i.ibb.co/wFgbtsDj/Logo-IDEALLE-colorida.jpg", description: "Pisos cerâmicos" },
     { name: "Cecafi", logo: "https://i.ibb.co/39PMLLqt/Logo-CECAFI-colorida.jpg", description: "Pisos cerâmicos" },
     { name: "Pisoforte", logo: "https://i.ibb.co/YFwQxFdm/Logo-PISOFORTE-colorida.jpg", description: "Revestimentos resistentes" },
     { name: "Fioranno", logo: "https://i.ibb.co/8wd60Y1/Logo-FIORANNO-colorida.jpg", description: "Pisos de alta qualidade" },
-    { name: "Cejatel", logo: partnerCejatel, description: "Materiais cerâmicos" },
-    { name: "Gyotoku", logo: "https://i.ibb.co/XgPwtNs/Logos-cdpisos-gyotoku.png", description: "prêmio Ruy Othake de melhor porcelanato do Brasil por 7 vezes" }
+    { name: "Cejatel", logo: partnerCejatel, description: "Pisos cerâmicos" },
+    { name: "Gyotoku", logo: "https://i.ibb.co/XgPwtNs/Logos-cdpisos-gyotoku.png", description: "Melhor porcelanato do Brasil por 7 vezes" }
   ];
 
   return (

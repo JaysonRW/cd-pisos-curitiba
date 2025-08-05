@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, MessageCircle } from "lucide-react";
-import heroImage from "@/assets/product-clean-ac.webp";
 
 const HeroSection = () => {
   const openWhatsApp = () => {
@@ -47,7 +46,7 @@ const HeroSection = () => {
               <Button
                 variant="outline"
                 size="lg"
-                className="border-white/30 text-white hover:bg-white/10 backdrop-blur-sm px-8 py-4 text-lg"
+                className="border-brand-purple bg-brand-purple text-white hover:bg-brand-purple/90 backdrop-blur-sm px-8 py-4 text-lg"
                 onClick={() => document.getElementById('produtos')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 Ver Produtos
@@ -75,8 +74,8 @@ const HeroSection = () => {
           <div className="relative">
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-2xl">
               <img 
-                src={heroImage} 
-                alt="Pisos de qualidade CD Pisos"
+                src="https://i.ibb.co/5hhK12nd/CD-PISOS-OFERTAS-SEMANAIS.jpg" 
+                alt="CD Pisos - Ofertas Semanais"
                 className="w-full h-auto rounded-lg shadow-lg"
               />
               

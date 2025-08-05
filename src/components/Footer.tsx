@@ -106,7 +106,7 @@ const Footer = () => {
               <div className="flex items-start space-x-3">
                 <Phone className="w-5 h-5 text-brand-blue mt-1 flex-shrink-0" />
                 <div>
-                  <p className="font-semibold">(41) 99619-0069</p>
+                  <p className="font-semibold">(41) 3344-6689</p>
                   <p className="text-white/80 text-sm">Telefone</p>
                 </div>
               </div>
@@ -135,7 +135,7 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-center md:text-left">
               <p className="text-white/80">
-                © 2024 CD Pisos. Todos os direitos reservados.
+                © 2025 CD Pisos. Todos os direitos reservados.
               </p>
               <p className="text-white/60 text-sm">
                 Pisos cerâmicos, porcelanatos e argamassas em Curitiba

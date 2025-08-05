@@ -1,15 +1,17 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CheckCircle, X, Info, Ruler, Package } from "lucide-react";
-import product1 from "@/assets/product-clean-ac.webp";
+import { CheckCircle, X, Info, Ruler, Package, ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import product1 from "@/assets/product-trentino.jpg";
 import product2 from "@/assets/product-lisboa.webp";
-import product3 from "@/assets/product-noble.webp";
 
 // Nova URL da imagem de argamassas
 const argamassasImage = "https://i.ibb.co/vKs9rTM/Argamassas-Kerakoll.jpg";
 
 const ProductsSection = () => {
+  const navigate = useNavigate();
+  
   const openWhatsApp = () => {
     window.open("https://wa.me/5541996190069?text=Olá! Gostaria de saber mais sobre os produtos da CD Pisos!", "_blank");
   };
@@ -99,104 +101,73 @@ const ProductsSection = () => {
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                 />
               </div>
+              
               <div className="p-6">
-                <h3 className="text-2xl font-bold text-brand-purple mb-3">
-                  {product.title}
-                </h3>
-                <p className="text-muted-foreground mb-4">
-                  {product.description}
-                </p>
-
-                <Tabs defaultValue="features" className="mb-6">
+                <h3 className="text-2xl font-bold text-brand-purple mb-3">{product.title}</h3>
+                <p className="text-muted-foreground mb-6">{product.description}</p>
+                
+                <Tabs defaultValue="features" className="w-full">
                   <TabsList className="grid w-full grid-cols-2">
-                    <TabsTrigger value="features" className="text-xs">
-                      <CheckCircle className="w-3 h-3 mr-1" />
-                      Benefícios
-                    </TabsTrigger>
-                    <TabsTrigger value="specs" className="text-xs">
-                      <Info className="w-3 h-3 mr-1" />
-                      Técnico
-                    </TabsTrigger>
+                    <TabsTrigger value="features">Características</TabsTrigger>
+                    <TabsTrigger value="specs">Especificações</TabsTrigger>
                   </TabsList>
                   
                   <TabsContent value="features" className="mt-4">
-                    <ul className="space-y-2">
-                      {product.features.map((feature, featureIndex) => (
-                        <li key={featureIndex} className="flex items-center text-sm">
+                    <div className="space-y-3">
+                      {product.features.map((feature, idx) => (
+                        <div key={idx} className="flex items-center">
                           <CheckCircle className="w-4 h-4 text-brand-green mr-2 flex-shrink-0" />
-                          {feature}
-                        </li>
+                          <span className="text-sm">{feature}</span>
+                        </div>
                       ))}
-                    </ul>
+                    </div>
                   </TabsContent>
                   
                   <TabsContent value="specs" className="mt-4">
                     <div className="space-y-3 text-sm">
-                      {product.title === "Pisos Cerâmicos" && (
-                        <>
-                          <div className="flex items-start">
-                            <Ruler className="w-4 h-4 text-brand-blue mr-2 mt-0.5 flex-shrink-0" />
-                            <div>
-                              <strong>Dimensões:</strong>
-                              <div className="text-muted-foreground">
-                                {product.specs.dimensions.join(", ")}
-                              </div>
-                            </div>
+                      {product.specs.dimensions && (
+                        <div className="flex items-start">
+                          <Ruler className="w-4 h-4 text-brand-purple mr-2 mt-0.5 flex-shrink-0" />
+                          <div>
+                            <strong>Dimensões:</strong>
+                            <div className="text-muted-foreground">{product.specs.dimensions.join(", ")}</div>
                           </div>
-                          <div className="flex items-start">
-                            <Package className="w-4 h-4 text-brand-purple mr-2 mt-0.5 flex-shrink-0" />
-                            <div>
-                              <strong>Absorção:</strong>
-                              <div className="text-muted-foreground">{product.specs.absorption}</div>
-                            </div>
-                          </div>
-                          <div className="flex items-start">
-                            <Info className="w-4 h-4 text-brand-green mr-2 mt-0.5 flex-shrink-0" />
-                            <div>
-                              <strong>Uso:</strong>
-                              <div className="text-muted-foreground">{product.specs.usage}</div>
-                            </div>
-                          </div>
-                        </>
+                        </div>
                       )}
-                      
-                      {product.title === "Porcelanatos" && (
-                        <>
-                          <div className="flex items-start">
-                            <Ruler className="w-4 h-4 text-brand-blue mr-2 mt-0.5 flex-shrink-0" />
-                            <div>
-                              <strong>Dimensões:</strong>
-                              <div className="text-muted-foreground">
-                                {product.specs.dimensions.join(", ")}
-                              </div>
-                            </div>
+                      {product.specs.absorption && (
+                        <div className="flex items-start">
+                          <Info className="w-4 h-4 text-brand-blue mr-2 mt-0.5 flex-shrink-0" />
+                          <div>
+                            <strong>Absorção:</strong>
+                            <div className="text-muted-foreground">{product.specs.absorption}</div>
                           </div>
-                          <div className="flex items-start">
-                            <Package className="w-4 h-4 text-brand-purple mr-2 mt-0.5 flex-shrink-0" />
-                            <div>
-                              <strong>Absorção:</strong>
-                              <div className="text-muted-foreground">{product.specs.absorption}</div>
-                            </div>
-                          </div>
-                          <div className="flex items-start">
-                            <Info className="w-4 h-4 text-brand-green mr-2 mt-0.5 flex-shrink-0" />
-                            <div>
-                              <strong>Uso:</strong>
-                              <div className="text-muted-foreground">{product.specs.usage}</div>
-                            </div>
-                          </div>
-                        </>
+                        </div>
                       )}
-                      
-                      {product.title === "Argamassas" && (
+                      {product.specs.usage && (
+                        <div className="flex items-start">
+                          <Package className="w-4 h-4 text-brand-green mr-2 mt-0.5 flex-shrink-0" />
+                          <div>
+                            <strong>Uso:</strong>
+                            <div className="text-muted-foreground">{product.specs.usage}</div>
+                          </div>
+                        </div>
+                      )}
+                      {product.specs.coverage && (
+                        <div className="flex items-start">
+                          <Ruler className="w-4 h-4 text-brand-purple mr-2 mt-0.5 flex-shrink-0" />
+                          <div>
+                            <strong>Rendimento:</strong>
+                            <div className="text-muted-foreground">{product.specs.coverage}</div>
+                          </div>
+                        </div>
+                      )}
+                      {product.specs.types && (
                         <>
                           <div className="flex items-start">
-                            <Package className="w-4 h-4 text-brand-blue mr-2 mt-0.5 flex-shrink-0" />
+                            <Package className="w-4 h-4 text-brand-green mr-2 mt-0.5 flex-shrink-0" />
                             <div>
                               <strong>Tipos:</strong>
-                              <div className="text-muted-foreground">
-                                {product.specs.types.join(", ")}
-                              </div>
+                              <div className="text-muted-foreground">{product.specs.types.join(", ")}</div>
                             </div>
                           </div>
                           <div className="flex items-start">
@@ -228,6 +199,22 @@ const ProductsSection = () => {
               </div>
             </Card>
           ))}
+        </div>
+
+        {/* Ver Mais Produtos Button */}
+        <div className="text-center mb-16">
+          <Button 
+            onClick={() => navigate("/produtos")}
+            size="lg"
+            className="bg-brand-green hover:bg-brand-green/90 text-white shadow-lg hover:shadow-xl transition-all duration-300 px-8 py-4 text-lg"
+          >
+            <Package className="w-5 h-5 mr-2" />
+            Ver Todos os Produtos
+            <ArrowRight className="w-5 h-5 ml-2" />
+          </Button>
+          <p className="text-muted-foreground mt-4 max-w-md mx-auto">
+            Explore nossa linha completa com mais de 20 opções de pisos e argamassas Kerakoll
+          </p>
         </div>
 
         {/* What we don't sell */}
