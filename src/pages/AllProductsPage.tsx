@@ -56,7 +56,7 @@ const AllProductsPage = () => {
     { name: "Kerakoll Polivalente Pro", image: "https://i.ibb.co/9m1mGtwG/Kerakoll-COMP-Polivalente-Pro-BR-24.jpg", size: "20kg", type: "AC-II" },
     { name: "Kerakoll Polivalente 7em1", image: "https://i.ibb.co/KcQP6J1B/Kerakoll-Polivalente-7em1-BR-24.jpg", size: "20kg", type: "AC-I" },
     { name: "Kerakoll Polivalente Super", image: "https://i.ibb.co/gMrq85YR/Kerakoll-COMP-Polivalente-Super-BR-24.jpg", size: "20kg", type: "AC-III" },
-    { name: "Kerakoll Assenta Flex Extra Plus", image: "https://i.ibb.co/CsS0QnLj/Kerakoll-Assenta-Flex-Extra-Plus-BR-24.jpg", size: "20kg", type: "AC-III" },
+    { name: "Kerakoll Assenta Flex Extra Plus", image: "https://i.ibb.co/CsS0QnLj/Kerakoll-Assenta-Flex-Extra-Plus-BR-24.jpg", size: "20kg", type: "AC-II" },
     { name: "Kerakoll Assenta Flex Extra", image: "https://i.ibb.co/QjbmCprJ/Kerakoll-Assenta-Flex-Extra-BR-24.jpg", size: "20kg", type: "AC-II" },
     { name: "Kerakoll Assenta Bem", image: "https://i.ibb.co/pBLZndgY/Kerakoll-Assenta-Bem-BR-24.jpg", size: "20kg", type: "AC-I" }
   ];
