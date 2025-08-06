@@ -7,37 +7,51 @@ import { useNavigate } from "react-router-dom";
 
 const AllProductsPage = () => {
   const navigate = useNavigate();
-  const [selectedCategory, setSelectedCategory] = useState("pisos");
+  const [selectedCategory, setSelectedCategory] = useState("todos");
 
   const openWhatsApp = (productName: string) => {
     const message = `Olá! Gostaria de solicitar um orçamento para: ${productName}`;
     window.open(`https://wa.me/5541996190069?text=${encodeURIComponent(message)}`, "_blank");
   };
 
-  const pisos = [
-    { name: "Clean AC RT", image: "https://i.ibb.co/1GYzP8xk/clean-ac-rt.webp", size: "45x45cm", type: "Cerâmico" },
-    { name: "Lisboa PO RT", image: "https://i.ibb.co/S420J8M1/lisboa-po-rt.webp", size: "60x60cm", type: "Porcelanato" },
-    { name: "Noble", image: "https://i.ibb.co/ZzJPvc7j/noble.webp", size: "60x60cm", type: "Porcelanato" },
-    { name: "Espanha", image: "https://i.ibb.co/ttb6bc7/espanha.webp", size: "45x45cm", type: "Cerâmico" },
-    { name: "Chicago AC RT", image: "https://i.ibb.co/4R7kR7St/chicago-ac-rt.webp", size: "45x45cm", type: "Cerâmico" },
-    { name: "Varena Soft RT", image: "https://i.ibb.co/cSvzS3Bk/varena-soft-rt.webp", size: "60x60cm", type: "Porcelanato" },
-    { name: "Lodz Rustic Plus RT", image: "https://i.ibb.co/4ZM2HfPQ/lodz-rustic-plus-rt.webp", size: "60x60cm", type: "Porcelanato" },
-    { name: "Albury AC RT", image: "https://i.ibb.co/1Gs8xDkm/albury-ac-rt.webp", size: "45x45cm", type: "Cerâmico" },
-    { name: "Branco Neve Soft RT", image: "https://i.ibb.co/MWYTrbn/branco-neve-soft-rt.webp", size: "60x60cm", type: "Porcelanato" },
-    { name: "Cintra Bege Plus AC RT", image: "https://i.ibb.co/M5pt5PFv/cintra-bege-plus-ac-rt.webp", size: "45x45cm", type: "Cerâmico" },
-    { name: "Nobium Plus", image: "https://i.ibb.co/JRtBspJb/nobium-plus.webp", size: "60x60cm", type: "Porcelanato" },
-    { name: "Chicago Plus", image: "https://i.ibb.co/whwbQ2hv/chicago-plus.webp", size: "60x60cm", type: "Porcelanato" },
-    { name: "Piazza Plus", image: "https://i.ibb.co/h11WDw7K/piazza-plus.webp", size: "60x60cm", type: "Porcelanato" },
-    { name: "Trentino Plus RT", image: "https://i.ibb.co/rfF8X6Bj/trentino-plus-rt.webp", size: "60x60cm", type: "Porcelanato" },
-    { name: "London Gray", image: "https://i.ibb.co/PzPD4jhm/london-gray.webp", size: "60x60cm", type: "Porcelanato" },
-    { name: "Croata Bege Plus", image: "https://i.ibb.co/93W5bRbv/croata-bege-plus.webp", size: "60x60cm", type: "Porcelanato" },
-    { name: "Nexis", image: "https://i.ibb.co/84MtVBC6/nexis.webp", size: "60x60cm", type: "Porcelanato" },
-    { name: "Nivus", image: "https://i.ibb.co/1JvBbqyD/nivus.webp", size: "60x60cm", type: "Porcelanato" },
-    { name: "Elegance Plus RT", image: "https://i.ibb.co/twbkqwWv/elegance-plus-rt.webp", size: "60x60cm", type: "Porcelanato" },
-    { name: "Ares Gray Ambiente", image: "https://i.ibb.co/8gpY6ry8/ares-gray-ambiente.webp", size: "60x60cm", type: "Porcelanato" },
-    { name: "Ares Gray", image: "https://i.ibb.co/WWGN24Y8/ares-gray.webp", size: "60x60cm", type: "Porcelanato" }
+  // Pisos Cerâmicos
+  const ceramicos = [
+    { name: "Asturias", image: "https://i.ibb.co/JRx0P66Y/asturias-31x59.jpg", size: "31x59cm", type: "Cerâmico" },
+    { name: "Doha Lux", image: "https://i.ibb.co/r2ZB1b0x/DOHA-LUX-68x68.webp", size: "68x68cm", type: "Cerâmico" },
+    { name: "Copacabana Gris", image: "https://i.ibb.co/5W2Ltxzh/copacabana-gris-50x50.jpg", size: "50x50cm", type: "Cerâmico" },
+    { name: "Arenisca Bege", image: "https://i.ibb.co/XZfMtqqs/ARENISCA-BEGE-50x50.webp", size: "50x50cm", type: "Cerâmico" },
+    { name: "Arenisca Beige", image: "https://i.ibb.co/rGN6qcMw/Arenisca-beige-31-X59.webp", size: "31x59cm", type: "Cerâmico" },
+    { name: "Arenisca Gray", image: "https://i.ibb.co/RGtg5mvp/ARENISCA-GRAY-50x50.webp", size: "50x50cm", type: "Cerâmico" },
+    { name: "Arenisca Gray", image: "https://i.ibb.co/Cs0TqZVS/arenisca-gray-31x59.webp", size: "31x59cm", type: "Cerâmico" },
+    { name: "Carrara", image: "https://i.ibb.co/wN358MkG/Carrara-31x59.webp", size: "31x59cm", type: "Cerâmico" },
+    { name: "Carrara", image: "https://i.ibb.co/QvmqkzmK/Carrara-50x50.webp", size: "50x50cm", type: "Cerâmico" },
+    { name: "Laser", image: "https://i.ibb.co/nsCwskwL/LASER-50x50.webp", size: "50x50cm", type: "Cerâmico" },
+    { name: "Doha White", image: "https://i.ibb.co/K3p7nSb/DOHA-WHITE-53x53.webp", size: "53x53cm", type: "Cerâmico" },
+    { name: "Portland Out Gray", image: "https://i.ibb.co/ymQj7rX1/PORTLAND-OUT-GRAY-53x53.jpg", size: "53x53cm", type: "Cerâmico" },
+    { name: "Portland Gray", image: "https://i.ibb.co/8qJ175y/PORTALND-GRAY-53x53.jpg", size: "53x53cm", type: "Cerâmico" },
+    { name: "Basalto Beige", image: "https://i.ibb.co/6RM8zp2q/Basalto-Beige-50x50.webp", size: "50x50cm", type: "Cerâmico" },
+    { name: "Asphalt Plus", image: "https://i.ibb.co/N6Qy2g6M/asphalt-plus-62x62.webp", size: "62x62cm", type: "Cerâmico" },
+    { name: "Alaska", image: "https://i.ibb.co/0W0vSHh/alaska-32x57.webp", size: "32x57cm", type: "Cerâmico" },
+    { name: "Menfi Beige Plus", image: "https://i.ibb.co/Zz3yVrdC/menfi-beige-plus-38x75.webp", size: "38x75cm", type: "Cerâmico" },
+    { name: "Menfi Grigio Plus", image: "https://i.ibb.co/jPXGq2xw/menfi-grigio-plus-38x75.webp", size: "38x75cm", type: "Cerâmico" },
+    { name: "Pompeia Marrom", image: "https://i.ibb.co/Kpj9stjz/pompeia-marrom-50x50.webp", size: "50x50cm", type: "Cerâmico" }
   ];
 
+  // Porcelanatos
+  const porcelanatos = [
+    { name: "Porcelanato Paglia", image: "https://i.ibb.co/yBmf1Xjk/porcelanato-paglia-63x63.jpg", size: "63x63cm", type: "Porcelanato" },
+    { name: "Porcelanato Xingu Polido", image: "https://i.ibb.co/d0q000wq/porcelanato-xingu-polido-71x71.jpg", size: "71x71cm", type: "Porcelanato" },
+    { name: "Porcelanato Piguês Polido", image: "https://i.ibb.co/N2Y9MqJL/porcelanato-pigu-s-polido-71x71.jpg", size: "71x71cm", type: "Porcelanato" },
+    { name: "Porcelanato Alvorada Bege", image: "https://i.ibb.co/3mfQLxtH/porcelanato-alvorada-bege-35x71.jpg", size: "35x71cm", type: "Porcelanato" },
+    { name: "Porcelanato Unique Bege", image: "https://i.ibb.co/ghmvm43/porcelanato-unique-bege-70x70.jpg", size: "70x70cm", type: "Porcelanato" },
+    { name: "Porcelanato Manila", image: "https://i.ibb.co/xSgkmQ7j/porcelanato-manila-63x63.jpg", size: "63x63cm", type: "Porcelanato" },
+    { name: "Porcelanato Montreal Cement", image: "https://i.ibb.co/tT0cp6Mx/porcelanato-montreal-cement-53x106.jpg", size: "53x106cm", type: "Porcelanato" }
+  ];
+
+  // Todos os pisos (cerâmicos + porcelanatos)
+  const todosPisos = [...ceramicos, ...porcelanatos];
+
+  // Argamassas
   const argamassas = [
     { name: "Kerakoll Polivalente Pro", image: "https://i.ibb.co/9m1mGtwG/Kerakoll-COMP-Polivalente-Pro-BR-24.jpg", size: "20kg", type: "AC-II" },
     { name: "Kerakoll Polivalente 7em1", image: "https://i.ibb.co/KcQP6J1B/Kerakoll-Polivalente-7em1-BR-24.jpg", size: "20kg", type: "AC-I" },
@@ -47,11 +61,16 @@ const AllProductsPage = () => {
     { name: "Kerakoll Assenta Bem", image: "https://i.ibb.co/pBLZndgY/Kerakoll-Assenta-Bem-BR-24.jpg", size: "20kg", type: "AC-I" }
   ];
 
-  const filteredPisos = selectedCategory === "ceramicos" 
-    ? pisos.filter(p => p.type === "Cerâmico")
-    : selectedCategory === "porcelanatos"
-    ? pisos.filter(p => p.type === "Porcelanato")
-    : pisos;
+  const getCurrentProducts = () => {
+    switch (selectedCategory) {
+      case "ceramicos":
+        return ceramicos;
+      case "porcelanatos":
+        return porcelanatos;
+      default:
+        return todosPisos;
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -68,7 +87,7 @@ const AllProductsPage = () => {
           </Button>
           
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Todos os Nossos Produtos
+            Catálogo Completo de Produtos
           </h1>
           <p className="text-xl text-white/90 max-w-2xl">
             Explore nossa linha completa de pisos cerâmicos, porcelanatos e argamassas Kerakoll
@@ -80,14 +99,22 @@ const AllProductsPage = () => {
       <div className="container mx-auto px-4 py-16">
         <Tabs value={selectedCategory} onValueChange={setSelectedCategory} className="w-full">
           <TabsList className="grid w-full grid-cols-3 mb-8">
-            <TabsTrigger value="pisos">Todos os Pisos</TabsTrigger>
+            <TabsTrigger value="todos">Todos os Pisos</TabsTrigger>
             <TabsTrigger value="ceramicos">Cerâmicos</TabsTrigger>
             <TabsTrigger value="porcelanatos">Porcelanatos</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="pisos" className="space-y-8">
+          <TabsContent value="todos" className="space-y-8">
+            <div className="text-center mb-8">
+              <h2 className="text-2xl font-bold text-brand-purple mb-2">
+                Todos os Nossos Pisos
+              </h2>
+              <p className="text-muted-foreground">
+                {todosPisos.length} produtos disponíveis entre cerâmicos e porcelanatos
+              </p>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {pisos.map((produto, index) => (
+              {getCurrentProducts().map((produto, index) => (
                 <Card key={index} className="overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
                   <div className="aspect-square overflow-hidden">
                     <img 
@@ -121,8 +148,16 @@ const AllProductsPage = () => {
           </TabsContent>
 
           <TabsContent value="ceramicos" className="space-y-8">
+            <div className="text-center mb-8">
+              <h2 className="text-2xl font-bold text-brand-purple mb-2">
+                Pisos Cerâmicos
+              </h2>
+              <p className="text-muted-foreground">
+                {ceramicos.length} produtos cerâmicos com excelente custo-benefício
+              </p>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {filteredPisos.map((produto, index) => (
+              {getCurrentProducts().map((produto, index) => (
                 <Card key={index} className="overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
                   <div className="aspect-square overflow-hidden">
                     <img 
@@ -156,8 +191,16 @@ const AllProductsPage = () => {
           </TabsContent>
 
           <TabsContent value="porcelanatos" className="space-y-8">
+            <div className="text-center mb-8">
+              <h2 className="text-2xl font-bold text-brand-purple mb-2">
+                Porcelanatos Premium
+              </h2>
+              <p className="text-muted-foreground">
+                {porcelanatos.length} produtos porcelanatos de alta qualidade e resistência
+              </p>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {filteredPisos.map((produto, index) => (
+              {getCurrentProducts().map((produto, index) => (
                 <Card key={index} className="overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
                   <div className="aspect-square overflow-hidden">
                     <img 
