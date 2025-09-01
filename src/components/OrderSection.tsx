@@ -34,10 +34,11 @@ const OrderSection = () => {
 
   const floorTypes = [
     { id: "ceramicos", name: "Pisos Cerâmicos" },
+    { id: "revestimentos", name: "Revestimentos" },
     { id: "porcelanatos", name: "Porcelanatos" },
     { id: "argamassas", name: "Argamassas" },
     { id: "combinado", name: "Combinação de Produtos" }
-  ];
+    ];
 
   const handleInputChange = (field: keyof OrderData, value: string) => {
     setOrderData(prev => ({

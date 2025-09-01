@@ -4,26 +4,116 @@ import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ArrowLeft, MessageCircle, Package, Ruler, Droplets } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import ProductModal from "@/components/ProductModal";
 
 const AllProductsPage = () => {
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState("todos");
+  const [selectedProduct, setSelectedProduct] = useState<any>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openWhatsApp = (productName: string) => {
     const message = `Olá! Gostaria de solicitar um orçamento para: ${productName}`;
     window.open(`https://wa.me/5541996190069?text=${encodeURIComponent(message)}`, "_blank");
   };
 
-  // Pisos Cerâmicos
+  // Informações detalhadas das argamassas
+  const argamassasDetails = {
+    "Kerakoll Polivalente 7em1": {
+      title: "Polivalente 7 em 1",
+      description: "Argamassa colante multiuso para grandes formatos em assentamento e piso sobre piso de porcelanatos, cerâmicas, pedras naturais e pastilhas.",
+      features: [
+        "Assentamento e sobreposição (piso sobre piso) de peças até 160x160 cm",
+        "Secagem rápida: 24 horas para rejuntar",
+        "Fachadas até 15 metros de altura",
+        "Piscinas frias e aquecidas",
+        "Pisos, paredes e drywall"
+      ]
+    },
+    "Kerakoll Assenta Bem": {
+      title: "AssentaBem",
+      description: "Argamassa colante flexível para cerâmicas em áreas internas.",
+      features: [
+        "Assentamento de peças até 90x90 cm",
+        "Secagem rápida: 24 horas para rejuntar",
+        "Pisos e paredes",
+        "Áreas internas"
+      ]
+    },
+    "Kerakoll Assenta Flex Extra": {
+      title: "AssentaFlex Extra",
+      description: "Argamassa colante flexível para cerâmicas e pedras naturais em áreas internas e externas.",
+      features: [
+        "Assentamento de peças até 100x100 cm",
+        "Secagem rápida: 24 horas para rejuntar",
+        "Pisos e paredes",
+        "Áreas internas e externas"
+      ]
+    },
+    "Kerakoll Assenta Flex Extra Plus": {
+      title: "AssentaFlex Extra+",
+      description: "Argamassa colante flexível para porcelanatos, cerâmicas, pedras naturais e pastilhas em áreas internas e externas.",
+      features: [
+        "Assentamento de peças até 120x120 cm",
+        "Secagem rápida: 24 horas para rejuntar",
+        "Fachadas até 6 metros de altura",
+        "Piscinas não aquecidas",
+        "Pisos, paredes e drywall"
+      ]
+    },
+    "Kerakoll Polivalente Super": {
+      title: "Polivalente Super",
+      description: "Argamassa colante ACIII para super formatos e uso de alto desempenho com porcelanatos, cerâmicas, pedras naturais e pastilhas.",
+      features: [
+        "Assentamento e sobreposição (piso sobre piso) de peças até 180x180 cm",
+        "Secagem super rápida: 16 horas para rejuntar",
+        "Fachadas até 60 metros de altura",
+        "Churrasqueiras, piscinas e saunas",
+        "Pisos, paredes e drywall"
+      ]
+    },
+    "Kerakoll Polivalente Pro": {
+      title: "Polivalente Pro",
+      description: "Argamassa colante ACIII‑DE sem limite de formatos, tempo em aberto estendido e uso de alto desempenho em assentamentos e piso sobre piso.",
+      features: [
+        "Assentamento e sobreposição (piso sobre piso) sem limite de formato",
+        "Secagem rápida: 48 horas para rejuntar",
+        "Fachadas até 60 metros de altura",
+        "Churrasqueiras, piscinas e saunas",
+        "Pisos normais e aquecidos, paredes e drywall",
+        "Tempo em aberto estendido",
+        "Deslizamento reduzido"
+      ]
+    }
+  };
+
+  const openProductModal = (product: any) => {
+    setSelectedProduct(product);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedProduct(null);
+  };
+
+  // Revestimentos Cerâmicos (31x59, 32x57, 38x75)
+  const revestimentos = [
+    { name: "Asturias", image: "https://i.ibb.co/JRx0P66Y/asturias-31x59.jpg", size: "31x59cm", type: "Revestimento" },
+    { name: "Arenisca Beige", image: "https://i.ibb.co/rGN6qcMw/Arenisca-beige-31-X59.webp", size: "31x59cm", type: "Revestimento" },
+    { name: "Arenisca Gray", image: "https://i.ibb.co/Cs0TqZVS/arenisca-gray-31x59.webp", size: "31x59cm", type: "Revestimento" },
+    { name: "Carrara", image: "https://i.ibb.co/wN358MkG/Carrara-31x59.webp", size: "31x59cm", type: "Revestimento" },
+    { name: "Alaska", image: "https://i.ibb.co/0W0vSHh/alaska-32x57.webp", size: "32x57cm", type: "Revestimento" },
+    { name: "Menfi Beige Plus", image: "https://i.ibb.co/Zz3yVrdC/menfi-beige-plus-38x75.webp", size: "38x75cm", type: "Revestimento" },
+    { name: "Menfi Grigio Plus", image: "https://i.ibb.co/jPXGq2xw/menfi-grigio-plus-38x75.webp", size: "38x75cm", type: "Revestimento" }
+  ];
+
+  // Pisos Cerâmicos (demais tamanhos)
   const ceramicos = [
-    { name: "Asturias", image: "https://i.ibb.co/JRx0P66Y/asturias-31x59.jpg", size: "31x59cm", type: "Cerâmico" },
     { name: "Doha Lux", image: "https://i.ibb.co/r2ZB1b0x/DOHA-LUX-68x68.webp", size: "68x68cm", type: "Cerâmico" },
     { name: "Copacabana Gris", image: "https://i.ibb.co/5W2Ltxzh/copacabana-gris-50x50.jpg", size: "50x50cm", type: "Cerâmico" },
     { name: "Arenisca Bege", image: "https://i.ibb.co/XZfMtqqs/ARENISCA-BEGE-50x50.webp", size: "50x50cm", type: "Cerâmico" },
-    { name: "Arenisca Beige", image: "https://i.ibb.co/rGN6qcMw/Arenisca-beige-31-X59.webp", size: "31x59cm", type: "Cerâmico" },
     { name: "Arenisca Gray", image: "https://i.ibb.co/RGtg5mvp/ARENISCA-GRAY-50x50.webp", size: "50x50cm", type: "Cerâmico" },
-    { name: "Arenisca Gray", image: "https://i.ibb.co/Cs0TqZVS/arenisca-gray-31x59.webp", size: "31x59cm", type: "Cerâmico" },
-    { name: "Carrara", image: "https://i.ibb.co/wN358MkG/Carrara-31x59.webp", size: "31x59cm", type: "Cerâmico" },
     { name: "Carrara", image: "https://i.ibb.co/QvmqkzmK/Carrara-50x50.webp", size: "50x50cm", type: "Cerâmico" },
     { name: "Laser", image: "https://i.ibb.co/nsCwskwL/LASER-50x50.webp", size: "50x50cm", type: "Cerâmico" },
     { name: "Doha White", image: "https://i.ibb.co/K3p7nSb/DOHA-WHITE-53x53.webp", size: "53x53cm", type: "Cerâmico" },
@@ -31,9 +121,6 @@ const AllProductsPage = () => {
     { name: "Portland Gray", image: "https://i.ibb.co/8qJ175y/PORTALND-GRAY-53x53.jpg", size: "53x53cm", type: "Cerâmico" },
     { name: "Basalto Beige", image: "https://i.ibb.co/6RM8zp2q/Basalto-Beige-50x50.webp", size: "50x50cm", type: "Cerâmico" },
     { name: "Asphalt Plus", image: "https://i.ibb.co/N6Qy2g6M/asphalt-plus-62x62.webp", size: "62x62cm", type: "Cerâmico" },
-    { name: "Alaska", image: "https://i.ibb.co/0W0vSHh/alaska-32x57.webp", size: "32x57cm", type: "Cerâmico" },
-    { name: "Menfi Beige Plus", image: "https://i.ibb.co/Zz3yVrdC/menfi-beige-plus-38x75.webp", size: "38x75cm", type: "Cerâmico" },
-    { name: "Menfi Grigio Plus", image: "https://i.ibb.co/jPXGq2xw/menfi-grigio-plus-38x75.webp", size: "38x75cm", type: "Cerâmico" },
     { name: "Pompeia Marrom", image: "https://i.ibb.co/Kpj9stjz/pompeia-marrom-50x50.webp", size: "50x50cm", type: "Cerâmico" }
   ];
 
@@ -65,8 +152,12 @@ const AllProductsPage = () => {
     switch (selectedCategory) {
       case "ceramicos":
         return ceramicos;
+      case "revestimentos":
+        return revestimentos;
       case "porcelanatos":
         return porcelanatos;
+      case "argamassas":
+        return argamassas;
       default:
         return todosPisos;
     }
@@ -90,7 +181,7 @@ const AllProductsPage = () => {
             Catálogo Completo de Produtos
           </h1>
           <p className="text-xl text-white/90 max-w-2xl">
-            Explore nossa linha completa de pisos cerâmicos, porcelanatos e argamassas Kerakoll
+            Explore nossa linha completa de pisos cerâmicos, revestimentos, porcelanatos e argamassas Kerakoll
           </p>
         </div>
       </div>
@@ -98,9 +189,10 @@ const AllProductsPage = () => {
       {/* Products Section */}
       <div className="container mx-auto px-4 py-16">
         <Tabs value={selectedCategory} onValueChange={setSelectedCategory} className="w-full">
-          <TabsList className="grid w-full grid-cols-3 mb-8">
+          <TabsList className="grid w-full grid-cols-4 mb-8">
             <TabsTrigger value="todos">Todos os Pisos</TabsTrigger>
             <TabsTrigger value="ceramicos">Cerâmicos</TabsTrigger>
+            <TabsTrigger value="revestimentos">Revestimentos</TabsTrigger>
             <TabsTrigger value="porcelanatos">Porcelanatos</TabsTrigger>
           </TabsList>
 
@@ -153,7 +245,7 @@ const AllProductsPage = () => {
                 Pisos Cerâmicos
               </h2>
               <p className="text-muted-foreground">
-                {ceramicos.length} produtos cerâmicos com excelente custo-benefício
+                {ceramicos.length} produtos cerâmicos para pisos com excelente custo-benefício
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -190,13 +282,13 @@ const AllProductsPage = () => {
             </div>
           </TabsContent>
 
-          <TabsContent value="porcelanatos" className="space-y-8">
+          <TabsContent value="revestimentos" className="space-y-8">
             <div className="text-center mb-8">
               <h2 className="text-2xl font-bold text-brand-purple mb-2">
-                Porcelanatos Premium
+                Revestimentos Cerâmicos
               </h2>
               <p className="text-muted-foreground">
-                {porcelanatos.length} produtos porcelanatos de alta qualidade e resistência
+                {revestimentos.length} produtos cerâmicos ideais para revestimento de paredes
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -226,12 +318,12 @@ const AllProductsPage = () => {
                     >
                       <MessageCircle className="w-4 h-4 mr-2" />
                       Solicitar Orçamento
-                    </Button>
-                  </div>
-                </Card>
-              ))}
-            </div>
-          </TabsContent>
+                  </Button>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </TabsContent>
         </Tabs>
 
         {/* Argamassas Section */}
@@ -266,20 +358,40 @@ const AllProductsPage = () => {
                     <Package className="w-4 h-4 mr-1" />
                     Embalagem: {argamassa.size}
                   </div>
-                  <Button 
-                    onClick={() => openWhatsApp(argamassa.name)}
-                    className="w-full bg-brand-green hover:bg-brand-green/90"
-                    size="sm"
-                  >
-                    <MessageCircle className="w-4 h-4 mr-2" />
-                    Solicitar Orçamento
-                  </Button>
+                  <div className="flex gap-2">
+                    <Button
+                      onClick={() => openProductModal(argamassa)}
+                      variant="outline"
+                      className="flex-1 border-brand-purple text-brand-purple hover:bg-brand-purple hover:text-white"
+                      size="sm"
+                    >
+                      Ver Detalhes
+                    </Button>
+                    <Button
+                      onClick={() => openWhatsApp(argamassa.name)}
+                      className="flex-1 bg-brand-green hover:bg-brand-green/90"
+                      size="sm"
+                    >
+                      <MessageCircle className="w-4 h-4 mr-2" />
+                      Orçamento
+                    </Button>
+                  </div>
                 </div>
               </Card>
             ))}
           </div>
         </div>
       </div>
+
+      {/* Modal de detalhes do produto */}
+      {selectedProduct && (
+        <ProductModal
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          product={selectedProduct}
+          productDetails={argamassasDetails[selectedProduct.name as keyof typeof argamassasDetails]}
+        />
+      )}
     </div>
   );
 };
