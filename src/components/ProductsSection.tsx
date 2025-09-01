@@ -1,8 +1,10 @@
+import { useState, useCallback } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CheckCircle, X, Info, Ruler, Package, ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import SearchBar from "@/components/SearchBar";
 import product1 from "@/assets/product-trentino.jpg";
 import product2 from "@/assets/product-lisboa.webp";
 
@@ -11,7 +13,8 @@ const argamassasImage = "https://i.ibb.co/vKs9rTM/Argamassas-Kerakoll.jpg";
 
 const ProductsSection = () => {
   const navigate = useNavigate();
-  
+  const [filteredProducts, setFilteredProducts] = useState<any[]>([]);
+
   const openWhatsApp = () => {
     window.open("https://wa.me/5541996190069?text=Olá! Gostaria de saber mais sobre os produtos da CD Pisos!", "_blank");
   };
@@ -77,6 +80,14 @@ const ProductsSection = () => {
     "Madeira"
   ];
 
+  const handleSearchResults = useCallback((results: any[]) => {
+    setFilteredProducts(results);
+  }, []);
+
+  const displayProducts = filteredProducts.length > 0 ?
+    filteredProducts.map((fp: any) => fp.originalProduct || fp) :
+    products;
+
   return (
     <section id="produtos" className="py-20 bg-muted/20">
       <div className="container mx-auto px-4">
@@ -90,9 +101,17 @@ const ProductsSection = () => {
           </p>
         </div>
 
+        {/* SearchBar para produtos */}
+        <div className="mb-12 max-w-4xl mx-auto">
+          <SearchBar 
+            products={products} 
+            onResults={handleSearchResults}
+          />
+        </div>
+
         {/* Main Products */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
-          {products.map((product, index) => (
+          {displayProducts.map((product: any, index: number) => (
             <Card key={index} className="overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-0 shadow-lg">
               <div className="aspect-video overflow-hidden">
                 <img 
@@ -114,7 +133,7 @@ const ProductsSection = () => {
                   
                   <TabsContent value="features" className="mt-4">
                     <div className="space-y-3">
-                      {product.features.map((feature, idx) => (
+                      {product.features.map((feature: string, idx: number) => (
                         <div key={idx} className="flex items-center">
                           <CheckCircle className="w-4 h-4 text-brand-green mr-2 flex-shrink-0" />
                           <span className="text-sm">{feature}</span>
@@ -154,45 +173,29 @@ const ProductsSection = () => {
                       )}
                       {product.specs.coverage && (
                         <div className="flex items-start">
-                          <Ruler className="w-4 h-4 text-brand-purple mr-2 mt-0.5 flex-shrink-0" />
+                          <Package className="w-4 h-4 text-brand-blue mr-2 mt-0.5 flex-shrink-0" />
                           <div>
-                            <strong>Rendimento:</strong>
+                            <strong>Cobertura:</strong>
                             <div className="text-muted-foreground">{product.specs.coverage}</div>
                           </div>
                         </div>
                       )}
                       {product.specs.types && (
-                        <>
-                          <div className="flex items-start">
-                            <Package className="w-4 h-4 text-brand-green mr-2 mt-0.5 flex-shrink-0" />
-                            <div>
-                              <strong>Tipos:</strong>
-                              <div className="text-muted-foreground">{product.specs.types.join(", ")}</div>
-                            </div>
+                        <div className="flex items-start">
+                          <Info className="w-4 h-4 text-brand-purple mr-2 mt-0.5 flex-shrink-0" />
+                          <div>
+                            <strong>Tipos:</strong>
+                            <div className="text-muted-foreground">{product.specs.types.join(", ")}</div>
                           </div>
-                          <div className="flex items-start">
-                            <Ruler className="w-4 h-4 text-brand-purple mr-2 mt-0.5 flex-shrink-0" />
-                            <div>
-                              <strong>Rendimento:</strong>
-                              <div className="text-muted-foreground">{product.specs.coverage}</div>
-                            </div>
-                          </div>
-                          <div className="flex items-start">
-                            <Info className="w-4 h-4 text-brand-green mr-2 mt-0.5 flex-shrink-0" />
-                            <div>
-                              <strong>Embalagem:</strong>
-                              <div className="text-muted-foreground">{product.specs.packaging}</div>
-                            </div>
-                          </div>
-                        </>
+                        </div>
                       )}
                     </div>
                   </TabsContent>
                 </Tabs>
-
+                
                 <Button 
                   onClick={openWhatsApp}
-                  className="w-full bg-brand-blue hover:bg-brand-blue/90"
+                  className="w-full mt-6 bg-brand-green hover:bg-brand-green/90 text-white shadow-lg hover:shadow-xl transition-all duration-300"
                 >
                   Solicitar Orçamento
                 </Button>

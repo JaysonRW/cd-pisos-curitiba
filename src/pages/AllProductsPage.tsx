@@ -1,16 +1,18 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ArrowLeft, MessageCircle, Package, Ruler, Droplets } from "lucide-react";
+import { ArrowLeft, MessageCircle, Package, Ruler } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import ProductModal from "@/components/ProductModal";
+import SearchBar from "@/components/SearchBar";
 
 const AllProductsPage = () => {
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState("todos");
   const [selectedProduct, setSelectedProduct] = useState<any>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [filteredProducts, setFilteredProducts] = useState<any[]>([]);
 
   const openWhatsApp = (productName: string) => {
     const message = `Olá! Gostaria de solicitar um orçamento para: ${productName}`;
@@ -88,7 +90,30 @@ const AllProductsPage = () => {
   };
 
   const openProductModal = (product: any) => {
-    setSelectedProduct(product);
+    // Se o produto tem informações detalhadas (como argamassas), separar os dados
+    const hasDetails = product.title && product.description && product.features;
+
+    if (hasDetails) {
+      // Produto com detalhes (argamassas)
+      const productData = {
+        name: product.name,
+        image: product.image,
+        size: product.size,
+        type: product.type
+      };
+
+      const productDetails = {
+        title: product.title,
+        description: product.description,
+        features: product.features
+      };
+
+      setSelectedProduct({ ...productData, productDetails });
+    } else {
+      // Produto simples (cerâmicos, porcelanatos)
+      setSelectedProduct(product);
+    }
+
     setIsModalOpen(true);
   };
 
@@ -140,15 +165,78 @@ const AllProductsPage = () => {
 
   // Argamassas
   const argamassas = [
-    { name: "Kerakoll Polivalente Pro", image: "https://i.ibb.co/9m1mGtwG/Kerakoll-COMP-Polivalente-Pro-BR-24.jpg", size: "20kg", type: "AC-II" },
-    { name: "Kerakoll Polivalente 7em1", image: "https://i.ibb.co/KcQP6J1B/Kerakoll-Polivalente-7em1-BR-24.jpg", size: "20kg", type: "AC-I" },
-    { name: "Kerakoll Polivalente Super", image: "https://i.ibb.co/gMrq85YR/Kerakoll-COMP-Polivalente-Super-BR-24.jpg", size: "20kg", type: "AC-III" },
-    { name: "Kerakoll Assenta Flex Extra Plus", image: "https://i.ibb.co/CsS0QnLj/Kerakoll-Assenta-Flex-Extra-Plus-BR-24.jpg", size: "20kg", type: "AC-II" },
-    { name: "Kerakoll Assenta Flex Extra", image: "https://i.ibb.co/QjbmCprJ/Kerakoll-Assenta-Flex-Extra-BR-24.jpg", size: "20kg", type: "AC-II" },
-    { name: "Kerakoll Assenta Bem", image: "https://i.ibb.co/pBLZndgY/Kerakoll-Assenta-Bem-BR-24.jpg", size: "20kg", type: "AC-I" }
+    { name: "Kerakoll Polivalente Pro", image: "https://i.ibb.co/9m1mGtwG/Kerakoll-COMP-Polivalente-Pro-BR-24.jpg", size: "20kg", type: "Argamassa" },
+    { name: "Kerakoll Polivalente 7em1", image: "https://i.ibb.co/KcQP6J1B/Kerakoll-Polivalente-7em1-BR-24.jpg", size: "20kg", type: "Argamassa" },
+    { name: "Kerakoll Polivalente Super", image: "https://i.ibb.co/gMrq85YR/Kerakoll-COMP-Polivalente-Super-BR-24.jpg", size: "20kg", type: "Argamassa" },
+    { name: "Kerakoll Assenta Flex Extra Plus", image: "https://i.ibb.co/CsS0QnLj/Kerakoll-Assenta-Flex-Extra-Plus-BR-24.jpg", size: "20kg", type: "Argamassa" },
+    { name: "Kerakoll Assenta Flex Extra", image: "https://i.ibb.co/QjbmCprJ/Kerakoll-Assenta-Flex-Extra-BR-24.jpg", size: "20kg", type: "Argamassa" },
+    { name: "Kerakoll Assenta Bem", image: "https://i.ibb.co/pBLZndgY/Kerakoll-Assenta-Bem-BR-24.jpg", size: "20kg", type: "Argamassa" }
   ];
 
+  // Transformar produtos em formato compatível com SearchBar
+  const transformProductsForSearch = (products: any[]) => {
+    return products.map(product => ({
+      title: product.name,
+      description: product.type === "Argamassa" ? 
+        (argamassasDetails[product.name as keyof typeof argamassasDetails]?.description || "Argamassa de alta qualidade") :
+        `${product.type} de alta qualidade`,
+      features: product.type === "Argamassa" ? 
+        (argamassasDetails[product.name as keyof typeof argamassasDetails]?.features || []) :
+        ["Resistência superior", "Fácil manutenção", "Acabamento perfeito"],
+      specs: {
+        dimensions: [product.size],
+        absorption: product.type === "Porcelanato" ? "Menos de 0,5%" : 
+                   product.type === "Cerâmico" ? "10% a 20%" : undefined,
+        usage: product.type === "Revestimento" ? "Paredes internas" :
+               product.type === "Porcelanato" ? "Todos os ambientes" :
+               product.type === "Cerâmico" ? "Ambientes internos e externos" :
+               "Assentamento de pisos e revestimentos",
+        coverage: product.type === "Argamassa" ? "3,5 a 4,5 m²/saco" : "1,1 a 2,8 peças/m²"
+      },
+      originalProduct: product
+    }));
+  };
+
+  // Todos os produtos para o SearchBar
+  const allProducts = transformProductsForSearch([...todosPisos, ...revestimentos, ...argamassas]);
+
+  const handleSearchResults = useCallback((results: any[]) => {
+    setFilteredProducts(results);
+  }, []);
+
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategory(category);
+    // Limpar a busca quando mudar de categoria para que as abas funcionem corretamente
+    setFilteredProducts([]);
+  };
+
   const getCurrentProducts = () => {
+    // Se há produtos filtrados pela busca, filtrar também por categoria se não for "todos"
+    if (filteredProducts.length > 0) {
+      const searchResults = filteredProducts.map(p => p.originalProduct);
+
+      // Se a categoria selecionada não for "todos", filtrar os resultados da busca por categoria
+      if (selectedCategory !== "todos") {
+        return searchResults.filter(product => {
+          switch (selectedCategory) {
+            case "ceramicos":
+              return product.type === "Cerâmico";
+            case "revestimentos":
+              return product.type === "Revestimento";
+            case "porcelanatos":
+              return product.type === "Porcelanato";
+            case "argamassas":
+              return product.type === "Argamassa";
+            default:
+              return true;
+          }
+        });
+      }
+
+      return searchResults;
+    }
+
+    // Caso contrário, usar filtro por categoria
     switch (selectedCategory) {
       case "ceramicos":
         return ceramicos;
@@ -159,7 +247,7 @@ const AllProductsPage = () => {
       case "argamassas":
         return argamassas;
       default:
-        return todosPisos;
+        return [...todosPisos, ...revestimentos, ...argamassas];
     }
   };
 
@@ -188,21 +276,30 @@ const AllProductsPage = () => {
 
       {/* Products Section */}
       <div className="container mx-auto px-4 py-16">
-        <Tabs value={selectedCategory} onValueChange={setSelectedCategory} className="w-full">
-          <TabsList className="grid w-full grid-cols-4 mb-8">
-            <TabsTrigger value="todos">Todos os Pisos</TabsTrigger>
-            <TabsTrigger value="ceramicos">Cerâmicos</TabsTrigger>
-            <TabsTrigger value="revestimentos">Revestimentos</TabsTrigger>
-            <TabsTrigger value="porcelanatos">Porcelanatos</TabsTrigger>
+        {/* SearchBar */}
+        <div className="mb-8">
+          <SearchBar 
+            products={allProducts} 
+            onResults={handleSearchResults}
+          />
+        </div>
+
+        <Tabs value={selectedCategory} onValueChange={handleCategoryChange} className="w-full">
+          <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 mb-8 h-auto gap-1 p-1">
+            <TabsTrigger value="todos" className="text-xs sm:text-sm px-2 py-2">Todos</TabsTrigger>
+            <TabsTrigger value="ceramicos" className="text-xs sm:text-sm px-2 py-2">Cerâmicos</TabsTrigger>
+            <TabsTrigger value="revestimentos" className="text-xs sm:text-sm px-2 py-2">Revestimentos</TabsTrigger>
+            <TabsTrigger value="porcelanatos" className="text-xs sm:text-sm px-2 py-2">Porcelanatos</TabsTrigger>
+            <TabsTrigger value="argamassas" className="text-xs sm:text-sm px-2 py-2">Argamassas</TabsTrigger>
           </TabsList>
 
           <TabsContent value="todos" className="space-y-8">
             <div className="text-center mb-8">
               <h2 className="text-2xl font-bold text-brand-purple mb-2">
-                Todos os Nossos Pisos
+                {filteredProducts.length > 0 ? "Resultados da Busca" : "Todos os Nossos Produtos"}
               </h2>
               <p className="text-muted-foreground">
-                {todosPisos.length} produtos disponíveis entre cerâmicos e porcelanatos
+                {getCurrentProducts().length} produtos {filteredProducts.length > 0 ? "encontrados" : "disponíveis"}
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -225,18 +322,45 @@ const AllProductsPage = () => {
                       <Ruler className="w-4 h-4 mr-1" />
                       {produto.size}
                     </div>
-                    <Button 
-                      onClick={() => openWhatsApp(produto.name)}
-                      className="w-full bg-brand-green hover:bg-brand-green/90"
-                      size="sm"
-                    >
-                      <MessageCircle className="w-4 h-4 mr-2" />
-                      Solicitar Orçamento
-                    </Button>
+                    <div className="flex flex-col sm:flex-row gap-2">
+                      <Button
+                        onClick={() => openWhatsApp(produto.name)}
+                        className="flex-1 bg-brand-green hover:bg-brand-green/90 text-xs sm:text-sm"
+                        size="sm"
+                      >
+                        <MessageCircle className="w-4 h-4 mr-1 sm:mr-2" />
+                        Orçamento
+                      </Button>
+                      {produto.type === "Argamassa" && argamassasDetails[produto.name as keyof typeof argamassasDetails] && (
+                        <Button
+                          onClick={() => openProductModal({
+                            ...produto,
+                            ...argamassasDetails[produto.name as keyof typeof argamassasDetails]
+                          })}
+                          variant="outline"
+                          size="sm"
+                          className="text-xs sm:text-sm"
+                        >
+                          <Package className="w-4 h-4 mr-1 sm:mr-0" />
+                          <span className="sm:hidden">Detalhes</span>
+                        </Button>
+                      )}
+                    </div>
                   </div>
                 </Card>
               ))}
             </div>
+            {getCurrentProducts().length === 0 && (
+              <div className="text-center py-12">
+                <Package className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
+                <h3 className="text-xl font-semibold text-muted-foreground mb-2">
+                  Nenhum produto encontrado
+                </h3>
+                <p className="text-muted-foreground">
+                  Tente ajustar os filtros ou termo de busca
+                </p>
+              </div>
+            )}
           </TabsContent>
 
           <TabsContent value="ceramicos" className="space-y-8">
@@ -245,7 +369,7 @@ const AllProductsPage = () => {
                 Pisos Cerâmicos
               </h2>
               <p className="text-muted-foreground">
-                {ceramicos.length} produtos cerâmicos para pisos com excelente custo-benefício
+                {getCurrentProducts().length} produtos cerâmicos para pisos com excelente custo-benefício
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -288,7 +412,7 @@ const AllProductsPage = () => {
                 Revestimentos Cerâmicos
               </h2>
               <p className="text-muted-foreground">
-                {revestimentos.length} produtos cerâmicos ideais para revestimento de paredes
+                {getCurrentProducts().length} produtos para revestimento de paredes
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -318,78 +442,124 @@ const AllProductsPage = () => {
                     >
                       <MessageCircle className="w-4 h-4 mr-2" />
                       Solicitar Orçamento
-                  </Button>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </TabsContent>
-        </Tabs>
-
-        {/* Argamassas Section */}
-        <div className="mt-16">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-brand-purple mb-4">
-              Argamassas Kerakoll
-            </h2>
-            <div className="w-24 h-1 bg-brand-blue mx-auto mb-6"></div>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Linha completa de argamassas profissionais para fixação de pisos e revestimentos
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {argamassas.map((argamassa, index) => (
-              <Card key={index} className="overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                <div className="aspect-square overflow-hidden">
-                  <img 
-                    src={argamassa.image} 
-                    alt={argamassa.name}
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-                <div className="p-4">
-                  <h3 className="font-bold text-brand-purple mb-2">{argamassa.name}</h3>
-                  <div className="flex items-center text-sm text-muted-foreground mb-2">
-                    <Droplets className="w-4 h-4 mr-1" />
-                    Classificação: {argamassa.type}
-                  </div>
-                  <div className="flex items-center text-sm text-muted-foreground mb-4">
-                    <Package className="w-4 h-4 mr-1" />
-                    Embalagem: {argamassa.size}
-                  </div>
-                  <div className="flex gap-2">
-                    <Button
-                      onClick={() => openProductModal(argamassa)}
-                      variant="outline"
-                      className="flex-1 border-brand-purple text-brand-purple hover:bg-brand-purple hover:text-white"
-                      size="sm"
-                    >
-                      Ver Detalhes
                     </Button>
-                    <Button
-                      onClick={() => openWhatsApp(argamassa.name)}
-                      className="flex-1 bg-brand-green hover:bg-brand-green/90"
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </TabsContent>
+
+          <TabsContent value="porcelanatos" className="space-y-8">
+            <div className="text-center mb-8">
+              <h2 className="text-2xl font-bold text-brand-purple mb-2">
+                Porcelanatos
+              </h2>
+              <p className="text-muted-foreground">
+                {getCurrentProducts().length} produtos porcelanatos premium
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {getCurrentProducts().map((produto, index) => (
+                <Card key={index} className="overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                  <div className="aspect-square overflow-hidden">
+                    <img 
+                      src={produto.image} 
+                      alt={produto.name}
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                  <div className="p-4">
+                    <h3 className="font-bold text-brand-purple mb-2">{produto.name}</h3>
+                    <div className="flex items-center text-sm text-muted-foreground mb-2">
+                      <Package className="w-4 h-4 mr-1" />
+                      {produto.type}
+                    </div>
+                    <div className="flex items-center text-sm text-muted-foreground mb-4">
+                      <Ruler className="w-4 h-4 mr-1" />
+                      {produto.size}
+                    </div>
+                    <Button 
+                      onClick={() => openWhatsApp(produto.name)}
+                      className="w-full bg-brand-green hover:bg-brand-green/90"
                       size="sm"
                     >
                       <MessageCircle className="w-4 h-4 mr-2" />
-                      Orçamento
+                      Solicitar Orçamento
                     </Button>
                   </div>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </div>
+                </Card>
+              ))}
+            </div>
+          </TabsContent>
+
+          <TabsContent value="argamassas" className="space-y-8">
+            <div className="text-center mb-8">
+              <h2 className="text-2xl font-bold text-brand-purple mb-2">
+                Argamassas Kerakoll
+              </h2>
+              <p className="text-muted-foreground">
+                {getCurrentProducts().length} produtos argamassas profissionais
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {getCurrentProducts().map((produto, index) => (
+                <Card key={index} className="overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                  <div className="aspect-square overflow-hidden">
+                    <img 
+                      src={produto.image} 
+                      alt={produto.name}
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                  <div className="p-4">
+                    <h3 className="font-bold text-brand-purple mb-2">{produto.name}</h3>
+                    <div className="flex items-center text-sm text-muted-foreground mb-2">
+                      <Package className="w-4 h-4 mr-1" />
+                      {produto.type}
+                    </div>
+                    <div className="flex items-center text-sm text-muted-foreground mb-4">
+                      <Ruler className="w-4 h-4 mr-1" />
+                      {produto.size}
+                    </div>
+                    <div className="flex flex-col sm:flex-row gap-2">
+                      <Button
+                        onClick={() => openWhatsApp(produto.name)}
+                        className="flex-1 bg-brand-green hover:bg-brand-green/90 text-xs sm:text-sm"
+                        size="sm"
+                      >
+                        <MessageCircle className="w-4 h-4 mr-1 sm:mr-2" />
+                        Orçamento
+                      </Button>
+                      {argamassasDetails[produto.name as keyof typeof argamassasDetails] && (
+                        <Button
+                          onClick={() => openProductModal({
+                            ...produto,
+                            ...argamassasDetails[produto.name as keyof typeof argamassasDetails]
+                          })}
+                          variant="outline"
+                          size="sm"
+                          className="text-xs sm:text-sm"
+                        >
+                          <Package className="w-4 h-4 mr-1 sm:mr-0" />
+                          <span className="sm:hidden">Detalhes</span>
+                        </Button>
+                      )}
+                    </div>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </TabsContent>
+        </Tabs>
       </div>
 
-      {/* Modal de detalhes do produto */}
+      {/* Product Modal */}
       {selectedProduct && (
         <ProductModal
+          product={selectedProduct}
+          productDetails={selectedProduct.productDetails}
           isOpen={isModalOpen}
           onClose={closeModal}
-          product={selectedProduct}
-          productDetails={argamassasDetails[selectedProduct.name as keyof typeof argamassasDetails]}
         />
       )}
     </div>
