@@ -130,7 +130,9 @@ const AllProductsPage = () => {
     { name: "Carrara", image: "https://i.ibb.co/wN358MkG/Carrara-31x59.webp", size: "31x59cm", type: "Revestimento" },
     { name: "Alaska", image: "https://i.ibb.co/0W0vSHh/alaska-32x57.webp", size: "32x57cm", type: "Revestimento" },
     { name: "Menfi Beige Plus", image: "https://i.ibb.co/Zz3yVrdC/menfi-beige-plus-38x75.webp", size: "38x75cm", type: "Revestimento" },
-    { name: "Menfi Grigio Plus", image: "https://i.ibb.co/jPXGq2xw/menfi-grigio-plus-38x75.webp", size: "38x75cm", type: "Revestimento" }
+    { name: "Menfi Grigio Plus", image: "https://i.ibb.co/jPXGq2xw/menfi-grigio-plus-38x75.webp", size: "38x75cm", type: "Revestimento" },
+    { name: "Elegance", image: "https://i.ibb.co/zVzMf1Hd/revestimento-elegance-32x60.png", size: "32x60cm", type: "Revestimento" },
+    { name: "Decorare", image: "https://i.ibb.co/qYFrv42X/Decorare-32x60.png", size: "32x60cm", type: "Revestimento" },
   ];
 
   // Pisos Cerâmicos (demais tamanhos)
@@ -146,18 +148,32 @@ const AllProductsPage = () => {
     { name: "Portland Gray", image: "https://i.ibb.co/8qJ175y/PORTALND-GRAY-53x53.jpg", size: "53x53cm", type: "Cerâmico" },
     { name: "Basalto Beige", image: "https://i.ibb.co/6RM8zp2q/Basalto-Beige-50x50.webp", size: "50x50cm", type: "Cerâmico" },
     { name: "Asphalt Plus", image: "https://i.ibb.co/N6Qy2g6M/asphalt-plus-62x62.webp", size: "62x62cm", type: "Cerâmico" },
-    { name: "Pompeia Marrom", image: "https://i.ibb.co/Kpj9stjz/pompeia-marrom-50x50.webp", size: "50x50cm", type: "Cerâmico" }
+    { name: "Pompeia Marrom", image: "https://i.ibb.co/Kpj9stjz/pompeia-marrom-50x50.webp", size: "50x50cm", type: "Cerâmico" },
+    { name: "Linz", image: "https://i.ibb.co/XrPhX7NJ/Piso-Cer-mico-Linz-50x50.png", size: "50x50cm", type: "Cerâmico" },
+    { name: "Noble", image: "https://i.ibb.co/Q3NzvsCZ/Piso-Cer-mico-Noble-57x57.png", size: "50x50cm", type: "Cerâmico" },
+    { name: "Espanha", image: "https://i.ibb.co/gLH0NDGX/Piso-Cer-mico-Espanha-57x57.png", size: "50x50cm", type: "Cerâmico" },
+    { name: "Selena Cinza", image: "https://i.ibb.co/bgSzmHhD/CD-Pisos-Selena-Cinza.jpg", size: "57x57cm", type: "Cerâmico" },
+    { name: "Stone", image: "https://i.ibb.co/tMdFpdyf/CD-Pisos-Stone.jpg", size: "50x50cm", type: "Cerâmico" },
+
+    
+    
   ];
 
   // Porcelanatos
   const porcelanatos = [
-    { name: "Porcelanato Paglia", image: "https://i.ibb.co/yBmf1Xjk/porcelanato-paglia-63x63.jpg", size: "63x63cm", type: "Porcelanato" },
-    { name: "Porcelanato Xingu Polido", image: "https://i.ibb.co/d0q000wq/porcelanato-xingu-polido-71x71.jpg", size: "71x71cm", type: "Porcelanato" },
-    { name: "Porcelanato Piguês Polido", image: "https://i.ibb.co/N2Y9MqJL/porcelanato-pigu-s-polido-71x71.jpg", size: "71x71cm", type: "Porcelanato" },
-    { name: "Porcelanato Alvorada Bege", image: "https://i.ibb.co/3mfQLxtH/porcelanato-alvorada-bege-35x71.jpg", size: "35x71cm", type: "Porcelanato" },
-    { name: "Porcelanato Unique Bege", image: "https://i.ibb.co/ghmvm43/porcelanato-unique-bege-70x70.jpg", size: "70x70cm", type: "Porcelanato" },
-    { name: "Porcelanato Manila", image: "https://i.ibb.co/xSgkmQ7j/porcelanato-manila-63x63.jpg", size: "63x63cm", type: "Porcelanato" },
-    { name: "Porcelanato Montreal Cement", image: "https://i.ibb.co/tT0cp6Mx/porcelanato-montreal-cement-53x106.jpg", size: "53x106cm", type: "Porcelanato" }
+    { name: "Paglia", image: "https://i.ibb.co/yBmf1Xjk/porcelanato-paglia-63x63.jpg", size: "63x63cm", type: "Porcelanato" },
+    { name: "Xingu Polido", image: "https://i.ibb.co/d0q000wq/porcelanato-xingu-polido-71x71.jpg", size: "71x71cm", type: "Porcelanato" },
+    { name: "Piguês Polido", image: "https://i.ibb.co/N2Y9MqJL/porcelanato-pigu-s-polido-71x71.jpg", size: "71x71cm", type: "Porcelanato" },
+    { name: "Alvorada Bege", image: "https://i.ibb.co/3mfQLxtH/porcelanato-alvorada-bege-35x71.jpg", size: "35x71cm", type: "Porcelanato" },
+    { name: "Unique Bege", image: "https://i.ibb.co/ghmvm43/porcelanato-unique-bege-70x70.jpg", size: "70x70cm", type: "Porcelanato" },
+    { name: "Manila", image: "https://i.ibb.co/xSgkmQ7j/porcelanato-manila-63x63.jpg", size: "63x63cm", type: "Porcelanato" },
+    { name: "Montreal Cement", image: "https://i.ibb.co/tT0cp6Mx/porcelanato-montreal-cement-53x106.jpg", size: "53x106cm", type: "Porcelanato" },
+    { name: "Campania Stone", image: "https://i.ibb.co/b5vnNK7g/Campania-72x72.png", size: "72x72cm", type: "Porcelanato" },
+    { name: "Soft Gr", image: "https://i.ibb.co/0pfKgwVx/Soft-Gr-72x72.png", size: "72x72cm", type: "Porcelanato" },
+    { name: "Vesuvio", image: "https://i.ibb.co/VcJKM3zv/Vesuvio-61x61.png", size: "61x61cm", type: "Porcelanato" },
+    { name: "Unique", image: "https://i.ibb.co/ynFqxZP7/Unique-70x70.png", size: "70x70cm", type: "Porcelanato" },
+    { name: "Arpuoador", image: "https://i.ibb.co/LhS2jxJz/Arpoador-70x70.png", size: "70x70cm", type: "Porcelanato" },
+
   ];
 
   // Todos os pisos (cerâmicos + porcelanatos)
@@ -521,27 +537,25 @@ const AllProductsPage = () => {
                       <Ruler className="w-4 h-4 mr-1" />
                       {produto.size}
                     </div>
-                    <div className="flex flex-col sm:flex-row gap-2">
-                      <Button
+                    <div className="flex gap-2">
+                      <Button 
                         onClick={() => openWhatsApp(produto.name)}
-                        className="flex-1 bg-brand-green hover:bg-brand-green/90 text-xs sm:text-sm"
+                        className="flex-1 bg-brand-green hover:bg-brand-green/90"
                         size="sm"
                       >
-                        <MessageCircle className="w-4 h-4 mr-1 sm:mr-2" />
+                        <MessageCircle className="w-4 h-4 mr-2" />
                         Orçamento
                       </Button>
                       {argamassasDetails[produto.name as keyof typeof argamassasDetails] && (
-                        <Button
+                        <Button 
                           onClick={() => openProductModal({
                             ...produto,
                             ...argamassasDetails[produto.name as keyof typeof argamassasDetails]
                           })}
                           variant="outline"
                           size="sm"
-                          className="text-xs sm:text-sm"
                         >
-                          <Package className="w-4 h-4 mr-1 sm:mr-0" />
-                          <span className="sm:hidden">Detalhes</span>
+                          <Package className="w-4 h-4" />
                         </Button>
                       )}
                     </div>
