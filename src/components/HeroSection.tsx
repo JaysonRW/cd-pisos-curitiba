@@ -1,9 +1,16 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, MessageCircle } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const HeroSection = () => {
+  const navigate = useNavigate();
+
   const openWhatsApp = () => {
     window.open("https://wa.me/5541996190069?text=Olá! Estou interessado na Semana de Ofertas da CD Pisos!", "_blank");
+  };
+
+  const goToAllProducts = () => {
+    navigate('/produtos');
   };
 
   return (
@@ -12,7 +19,7 @@ const HeroSection = () => {
       <div className="absolute inset-0 opacity-30" style={{
         backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
       }}></div>
-      
+
       <div className="container mx-auto px-4 py-20 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Content */}
@@ -21,12 +28,12 @@ const HeroSection = () => {
               <div className="inline-block bg-brand-red/20 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2">
                 <span className="text-white font-semibold">🔥 Semana de Ofertas</span>
               </div>
-              
+
               <h1 className="text-4xl md:text-6xl font-bold leading-tight">
                 Pisos Premium
                 <span className="block text-brand-blue"> para sua Obra</span>
               </h1>
-              
+
               <p className="text-xl md:text-2xl text-white/90 max-w-lg">
                 Cerâmicos, Porcelanatos e Argamassas com qualidade garantida e entrega rápida em Curitiba
               </p>
@@ -42,12 +49,12 @@ const HeroSection = () => {
                 Aproveitar Ofertas
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
-              
+
               <Button
                 variant="outline"
                 size="lg"
                 className="border-brand-purple bg-brand-purple text-white hover:bg-brand-purple/90 backdrop-blur-sm px-8 py-4 text-lg"
-                onClick={() => document.getElementById('produtos')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={goToAllProducts}
               >
                 Ver Produtos
               </Button>
@@ -73,12 +80,12 @@ const HeroSection = () => {
           {/* Hero Image */}
           <div className="relative">
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-2xl">
-              <img 
-                src="https://i.ibb.co/5hhK12nd/CD-PISOS-OFERTAS-SEMANAIS.jpg" 
+              <img
+                src="https://i.ibb.co/5hhK12nd/CD-PISOS-OFERTAS-SEMANAIS.jpg"
                 alt="CD Pisos - Ofertas Semanais"
                 className="w-full h-auto rounded-lg shadow-lg"
               />
-              
+
               {/* Floating Badge */}
               <div className="absolute -top-4 -right-4 bg-brand-red text-white rounded-full px-6 py-3 shadow-lg">
                 <div className="text-center">
