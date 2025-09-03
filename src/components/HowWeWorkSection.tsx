@@ -1,12 +1,7 @@
 import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Search, MessageCircle, Truck } from "lucide-react";
 
 const HowWeWorkSection = () => {
-  const openWhatsApp = () => {
-    window.open("https://wa.me/5541996190069?text=Olá! Gostaria de saber como funciona o processo de compra na CD Pisos!", "_blank");
-  };
-
   const steps = [
     {
       number: "01",
@@ -41,7 +36,7 @@ const HowWeWorkSection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {steps.map((step, index) => (
             <Card key={index} className="relative p-8 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-0 shadow-lg">
               {/* Step Number */}
@@ -71,32 +66,6 @@ const HowWeWorkSection = () => {
               )}
             </Card>
           ))}
-        </div>
-
-        {/* CTA Section */}
-        <div className="bg-gradient-to-r from-brand-green to-brand-blue rounded-2xl p-8 md:p-12 text-white text-center">
-          <h3 className="text-2xl md:text-3xl font-bold mb-4">
-            Pronto para começar seu projeto?
-          </h3>
-          <p className="text-lg mb-8 text-white/90">
-            Nossa equipe está preparada para atender você com agilidade e qualidade
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button
-              onClick={openWhatsApp}
-              size="lg"
-              className="bg-white text-brand-green hover:bg-white/90 shadow-lg px-8 py-3"
-            >
-              <MessageCircle className="w-5 h-5 mr-2" />
-              Iniciar Processo
-            </Button>
-            
-            <div className="text-white/90">
-              <p className="font-semibold">WhatsApp: (41) 99619-0069</p>
-              <p className="text-sm">Atendimento rápido e personalizado</p>
-            </div>
-          </div>
         </div>
       </div>
     </section>
