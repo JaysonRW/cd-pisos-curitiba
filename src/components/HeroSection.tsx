@@ -63,7 +63,7 @@ const HeroSection = () => {
             {/* Features */}
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-8">
               <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-center">
-                <div className="text-2xl font-bold">500+</div>
+                <div className="text-2xl font-bold">250+</div>
                 <div className="text-sm text-white/80">Produtos</div>
               </div>
               <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-center">
