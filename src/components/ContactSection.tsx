@@ -91,49 +91,7 @@ const ContactSection = () => {
               </p>
             </Card>
           ))}
-        </div>
-
-        {/* Additional Info */}
-        <div className="mt-16 bg-white rounded-2xl p-8 shadow-lg border-l-4 border-brand-green">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-            <div>
-              <h4 className="text-2xl font-bold text-brand-purple mb-4">
-                Por que escolher a CD Pisos?
-              </h4>
-              <ul className="space-y-3 text-muted-foreground">
-                <li className="flex items-center">
-                  <div className="w-2 h-2 bg-brand-green rounded-full mr-3"></div>
-                  Atendimento personalizado para cada projeto
-                </li>
-                <li className="flex items-center">
-                  <div className="w-2 h-2 bg-brand-blue rounded-full mr-3"></div>
-                  Entrega rápida com frota própria
-                </li>
-                <li className="flex items-center">
-                  <div className="w-2 h-2 bg-brand-purple rounded-full mr-3"></div>
-                  Preços competitivos direto da fábrica
-                </li>
-                <li className="flex items-center">
-                  <div className="w-2 h-2 bg-brand-red rounded-full mr-3"></div>
-                  Qualidade garantida das melhores marcas
-                </li>
-              </ul>
-            </div>
-            
-            <div className="text-center lg:text-right">
-              <div className="bg-gradient-to-r from-brand-purple to-brand-blue rounded-2xl p-6 text-white">
-                <h5 className="text-xl font-bold mb-4">Pronto para começar?</h5>
-                <p className="mb-4">Fale conosco agora mesmo!</p>
-                <Button
-                  onClick={openWhatsApp}
-                  className="bg-brand-green hover:bg-brand-green/90 text-white"
-                >
-                  Iniciar Conversa
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
+        </div>            
       </div>
     </section>
   );
