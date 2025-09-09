@@ -1,7 +1,7 @@
-on: push
+on:
   push:
-    branche:
-      - main  
+    branches:
+      - main 
  
 name: 🚀 Deploy website CD pisos e distribuição on push
 jobs:
